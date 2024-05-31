@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Preview</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Email Preview</h1>
+        <p>To: {{ recipient }}</p>
+        <p>{{ translated_message }}</p>
+        <div>
+            {% for gif in gifs %}
+                <img src="{{ gif.images.fixed_height.url }}" alt="GIF">
+                <form method="post" action="{% url 'send_email' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="recipient" value="{{ recipient }}">
+                    <input type="hidden" name="message" value="{{ translated_message }}">
+                    <input type="hidden" name="gif_url" value="{{ gif.images.fixed_height.url }}">
+                    <button type="submit" class="btn btn-success">Send Email with this GIF</button>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
