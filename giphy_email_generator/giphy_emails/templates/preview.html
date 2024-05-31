@@ -22,6 +22,8 @@
                     <input type="hidden" name="recipient" value="{{ form.recipient.value }}">
                     <input type="hidden" name="message" value="{{ form.message.value }}">
                     <input type="hidden" name="gif_url" value="{{ gif_url }}">
+                    <input type="hidden" name="language" value="{{ form.language.value }}">
+
                     <button type="submit" class="btn btn-success">Send Email with this GIF</button>
                 </form>
             {% endfor %}

@@ -127,7 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
 
 # Mail trap send email - sends to sandbox
-EMAIL_BACKEND = 'prj_revenue_hive.backends.email_backend.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_FROM = 'support@revenuehive.io'
