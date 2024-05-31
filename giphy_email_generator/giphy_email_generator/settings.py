@@ -122,3 +122,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# settings.py
+
+# Mail trap send email - sends to sandbox
+EMAIL_BACKEND = 'prj_revenue_hive.backends.email_backend.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'support@revenuehive.io'
+EMAIL_HOST_USER = 'aleisha@revenuehive.io'
+EMAIL_HOST_PASSWORD = 'pzkwqiryoimbtrbk'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
