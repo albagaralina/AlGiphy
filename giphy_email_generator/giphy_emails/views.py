@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from giphy_emails.forms import EmailForm
 import requests
 from django.core.mail import send_mail
-from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 API_KEY = 'tsAk2y5Pi44mtiGXVFVUxRPP4dzjhPxv'
 
@@ -43,17 +45,27 @@ def send_email(request):
         message = request.POST.get('message')
         gif_url = request.POST.get('gif_url')
 
-        # Send email using send_mail function
+        # Prepare email content
+        subject = 'Subject of the email'
+        html_content = render_to_string('email_template.html', {'message': message, 'gif_url': gif_url})
+        text_content = strip_tags(html_content)
+
+        # Send email using EmailMultiAlternatives
         try:
-            send_mail(
-                'Subject of the email',  # Subject of the email
-                message,  # Message content
-                'sender@example.com',  # Sender's email address
-                [recipient],  # List of recipient email addresses
-                html_message=f'<p>{message}</p><img src="{gif_url}" alt="GIF">'  # HTML content of the email
-            )
-            return HttpResponse('Email sent successfully!')
+            email = EmailMultiAlternatives(subject, text_content, 'sender@example.com', [recipient])
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+            return redirect('success')  # Redirect to success page
         except Exception as e:
-            return HttpResponse(f'Failed to send email: {str(e)}')
-    else:
-        return HttpResponse('Invalid request method!')
+            return redirect('error')  # Redirect to error page
+
+    # If request method is not POST, handle it appropriately, perhaps render a form again
+    # For example:
+    form = EmailForm()
+    return render(request, 'base.html', {'form': form})
+
+def success(request):
+    return render(request, 'success.html')
+
+def error(request):
+    return render(request, 'error.html')

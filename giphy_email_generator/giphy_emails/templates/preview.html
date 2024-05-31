@@ -9,16 +9,19 @@
 <body>
     <div class="container">
         <h1>Email Preview</h1>
-        <p>To: {{ recipient }}</p>
-        <p>{{ translated_message }}</p>
+        <p>To: {{ form.recipient.value }}</p>
+        <p>Subject: {{ form.subject.value }}</p>
+        <p>Message: {{ form.message.value }}</p>
+        <p>GIF Keyword: {{ form.keyword.value }}</p>
+        <p>Language: {{ form.language.value }}</p>
         <div>
-            {% for gif in gifs %}
-                <img src="{{ gif.images.fixed_height.url }}" alt="GIF">
+            {% for gif_url in gif_urls %}
+                <img src="{{ gif_url }}" alt="GIF">
                 <form method="post" action="{% url 'send_email' %}">
                     {% csrf_token %}
-                    <input type="hidden" name="recipient" value="{{ recipient }}">
-                    <input type="hidden" name="message" value="{{ translated_message }}">
-                    <input type="hidden" name="gif_url" value="{{ gif.images.fixed_height.url }}">
+                    <input type="hidden" name="recipient" value="{{ form.recipient.value }}">
+                    <input type="hidden" name="message" value="{{ form.message.value }}">
+                    <input type="hidden" name="gif_url" value="{{ gif_url }}">
                     <button type="submit" class="btn btn-success">Send Email with this GIF</button>
                 </form>
             {% endfor %}
