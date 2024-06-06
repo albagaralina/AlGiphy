@@ -131,7 +131,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_FROM = 'support@revenuehive.io'
-EMAIL_HOST_USER = 'aleisha@revenuehive.io'
-EMAIL_HOST_PASSWORD = 'pzkwqiryoimbtrbk'
+EMAIL_HOST_USER = 'alba@revenuehive.io'
+EMAIL_HOST_PASSWORD = 'rpea cmcp gtje bipd'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+

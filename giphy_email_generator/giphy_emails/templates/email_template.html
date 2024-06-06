@@ -6,19 +6,9 @@
     <title>Email Template</title>
 </head>
 <body>
-    <h1>Email Content</h1>
-    <p><strong>Recipient:</strong> {{ recipient }}</p>
-    <p><strong>Subject:</strong> {{ subject }}</p>
-    <p><strong>Message:</strong> {{ message }}</p>
-    <img src="{{ gif_url }}" alt="GIF">
-    <form method="post" action="{% url 'send_email' %}">
-        {% csrf_token %}
-        <input type="hidden" name="recipient" value="{{ recipient }}">
-        <input type="hidden" name="message" value="{{ message }}">
-        <input type="hidden" name="gif_url" value="{{ gif_url }}">
-        <input type="hidden" name="language" value="{{ form.language.value }}">
 
-        <button type="submit" class="btn btn-success">Send Email</button>
-    </form>
+ {{ message }}
+    <img src="{{ gif_url }}" alt="GIF">
+
 </body>
 </html>
